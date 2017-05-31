@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Header from './header/Header';
+import MovieData from './movieData/MovieData';
+import Footer from './footer/Footer';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      movies: []
+    };
+
+  };
+
+  componentWillMount() {
+    const url = `https://raw.githubusercontent.com/hjorturlarsen/IMDB-top-100/master/data/movies.json`
+    axios.get(url).then( res => {
+      const movies = res.data;
+      this.setState({movies: movies})
+    });
+  }
+
   render() {
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header />
+        <MovieData movies={this.state.movies} />
+        <Footer />
       </div>
     );
   }

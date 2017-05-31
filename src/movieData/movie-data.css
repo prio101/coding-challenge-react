@@ -1,0 +1,17 @@
+.movie-title {
+  font-size: 1.5em;
+  font-weight: 800;
+  color: #777;
+}
+
+.movie-rank {
+  font-size: 1em;
+  font-weight: 600;
+
+  color: #fff;
+  background-color: #00BCD4;
+
+  display: inline;
+  padding: 5px;
+  border-radius: 10px;
+}

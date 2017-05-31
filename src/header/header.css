@@ -1,0 +1,22 @@
+.header-bar{
+  text-align: center;
+}
+.title {
+  color: #777;
+  font-weight: 900;
+  font-size: 1.5em;
+  font-family: monospace;
+  padding-top: 0.5em;
+}
+
+.title-sub {
+  color: #777;
+  font-weight: 900;
+  font-size: 1.2em;
+  font-family: monospace;
+  padding-top: 0.5em;
+}
+
+.header-single-link {
+  list-style: none;
+}
