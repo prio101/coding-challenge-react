@@ -26,6 +26,16 @@ class MovieData extends Component{
     this.refs.title.value = '';
   }
 
+  deleteMovie(movie){
+    let movies = this.state.movies;
+    for(let i = 0; i < movies.length; i++ ){
+      if(movies[i].id === movie.id ){
+        movies.splice(i, 1);
+      }
+    }
+    this.setState({ movies: movies })
+  }
+
   render() {
     let filteredMovies = this.state.movies.filter(
       (movie) => {
@@ -52,6 +62,9 @@ class MovieData extends Component{
             <div key={ movie.id }>
                 <h4 className="movie-title">Movie Name: { movie.title }</h4>
                 <p className="movie-rank">Movie Rank:&nbsp;{ movie.rank }</p>
+                <button onClick={this.deleteMovie.bind(this, movie)}>
+                  Delete Movie
+                </button>
             </div>
           )}
         </div>
