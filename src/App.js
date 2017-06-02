@@ -6,7 +6,6 @@ import './App.css';
 
 class App extends Component {
   render() {
-    console.log(this.fetchMovies)
     return (
       <div className="App">
         <Header />

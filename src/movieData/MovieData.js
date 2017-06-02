@@ -6,7 +6,10 @@ class MovieData extends Component{
     super(props);
     this.state={
       search: '',
-      movies: props.movies
+      movies: props.movies,
+      title: '',
+      rank: '',
+      isEdit: 0
     }
   }
 
@@ -36,6 +39,41 @@ class MovieData extends Component{
     this.setState({ movies: movies })
   }
 
+  editMovie(movie){
+    this.setState({
+      title: movie.title,
+      rank: movie.rank,
+      isEdit: movie.id
+    });
+  }
+
+  updateChange(event){
+    event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  updateMovie(event){
+    event.preventDefault();
+    let movies = this.state.movies;
+    let title = this.refs.title.value.trim();
+    let rank = this.refs.rank.value.trim();
+    let id = this.state.isEdit;
+    if(this.state.isEdit !== 0){
+      this.deleteMovie(this.state.isEdit);
+    }
+    this.setState({
+      title: '',
+      rank: '',
+      movies: movies.concat({
+        id: id,
+        title: title,
+        rank: rank
+      })
+    })
+  }
+
   render() {
     let filteredMovies = this.state.movies.filter(
       (movie) => {
@@ -57,10 +95,34 @@ class MovieData extends Component{
           <button type="submit">Add New Movie</button>
         </form>
 
+        <form
+          onSubmit={this.updateMovie.bind(this)}
+          onChange={this.updateChange.bind(this)}
+        >
+          <input
+            value={this.state.title}
+            type="text"
+            ref="title"
+            name="title"
+          />
+          <input
+            value={this.state.rank}
+            type="text"
+            ref="rank"
+            name="rank"
+          />
+          <button type="submit">Update</button>
+        </form>
+
         <div className="movie-collection">
           {filteredMovies.map(movie =>
             <div key={ movie.id }>
-                <h4 className="movie-title">Movie Name: { movie.title }</h4>
+                <h4
+                  className="movie-title"
+                  onClick={this.editMovie.bind(this, movie)}
+                >
+                  Movie Name: { movie.title }
+                </h4>
                 <p className="movie-rank">Movie Rank:&nbsp;{ movie.rank }</p>
                 <button onClick={this.deleteMovie.bind(this, movie)}>
                   Delete Movie
