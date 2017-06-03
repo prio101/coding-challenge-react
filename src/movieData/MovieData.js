@@ -32,7 +32,7 @@ class MovieData extends Component{
   deleteMovie(movie){
     let movies = this.state.movies;
     for(let i = 0; i < movies.length; i++ ){
-      if(movies[i].id === movie.id ){
+      if(movies[i].id === movie ){
         movies.splice(i, 1);
       }
     }
@@ -63,15 +63,16 @@ class MovieData extends Component{
     if(this.state.isEdit !== 0){
       this.deleteMovie(this.state.isEdit);
     }
+    let newMovies = this.state.movies
+                      .concat({id, title, rank})
+                        .sort(function(a,b){
+                          return a.rank - b.rank;
+                        });
     this.setState({
       title: '',
       rank: '',
-      movies: movies.concat({
-        id: id,
-        title: title,
-        rank: rank
-      })
-    })
+      movies: newMovies
+    });
   }
 
   render() {
@@ -116,7 +117,7 @@ class MovieData extends Component{
 
         <div className="movie-collection">
           {filteredMovies.map(movie =>
-            <div key={ movie.id }>
+            <div key={movie.id}>
                 <h4
                   className="movie-title"
                   onClick={this.editMovie.bind(this, movie)}
@@ -124,7 +125,7 @@ class MovieData extends Component{
                   Movie Name: { movie.title }
                 </h4>
                 <p className="movie-rank">Movie Rank:&nbsp;{ movie.rank }</p>
-                <button onClick={this.deleteMovie.bind(this, movie)}>
+                <button onClick={this.deleteMovie.bind(this, movie.id)}>
                   Delete Movie
                 </button>
             </div>
