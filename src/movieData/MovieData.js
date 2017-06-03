@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import '../movieData/movie-data.css'
+import AddMovie from '../movieData/AddMovie';
+import UpdateMovie from '../movieData/UpdateMovie';
+import '../movieData/movie-data.css';
 
 class MovieData extends Component{
   constructor(props){
@@ -18,15 +20,13 @@ class MovieData extends Component{
   }
 
 
-  addMovie(event){
-    event.preventDefault();
+  addMovie(title){
     let id = this.state.movies.length + 1;
-    let title = this.refs.title.value;
     let rank = this.state.movies.length + 1;
+    let movies = this.state.movies.concat({id, title, rank});
     this.setState({
-      movies: this.state.movies.concat({id, title, rank})
+      movies: movies
     });
-    this.refs.title.value = '';
   }
 
   deleteMovie(movie){
@@ -54,16 +54,15 @@ class MovieData extends Component{
     });
   }
 
-  updateMovie(event){
-    event.preventDefault();
+  updateMovie(titleData, rankData){
     let movies = this.state.movies;
-    let title = this.refs.title.value.trim();
-    let rank = this.refs.rank.value.trim();
+    let title = titleData.trim();
+    let rank = rankData.trim();
     let id = this.state.isEdit;
     if(this.state.isEdit !== 0){
       this.deleteMovie(this.state.isEdit);
     }
-    let newMovies = this.state.movies
+    let newMovies = movies
                       .concat({id, title, rank})
                         .sort(function(a,b){
                           return a.rank - b.rank;
@@ -72,7 +71,7 @@ class MovieData extends Component{
       title: '',
       rank: '',
       movies: newMovies
-    });
+    })
   }
 
   render() {
@@ -91,29 +90,14 @@ class MovieData extends Component{
           onChange={this.updateSearch.bind(this)}
         />
 
-        <form onSubmit={this.addMovie.bind(this)}>
-          <input type="text" ref="title"/>
-          <button type="submit">Add New Movie</button>
-        </form>
+        <AddMovie addMovie={this.addMovie.bind(this)} />
 
-        <form
-          onSubmit={this.updateMovie.bind(this)}
-          onChange={this.updateChange.bind(this)}
-        >
-          <input
-            value={this.state.title}
-            type="text"
-            ref="title"
-            name="title"
-          />
-          <input
-            value={this.state.rank}
-            type="text"
-            ref="rank"
-            name="rank"
-          />
-          <button type="submit">Update</button>
-        </form>
+        <UpdateMovie
+          updateChange={this.updateChange.bind(this)}
+          updateMovie={this.updateMovie.bind(this)}
+          title={this.state.title}
+          rank={this.state.rank}
+        />
 
         <div className="movie-collection">
           {filteredMovies.map(movie =>
@@ -124,8 +108,13 @@ class MovieData extends Component{
                 >
                   Movie Name: { movie.title }
                 </h4>
-                <p className="movie-rank">Movie Rank:&nbsp;{ movie.rank }</p>
-                <button onClick={this.deleteMovie.bind(this, movie.id)}>
+                <p
+                  className="movie-rank">
+                  Movie Rank:&nbsp;{ movie.rank }
+                </p>
+                <button
+                  onClick={this.deleteMovie.bind(this, movie.id)}
+                >
                   Delete Movie
                 </button>
             </div>
