@@ -1,4 +1,15 @@
-.search-form{
+.form-holder{
+  margin-left: 20%;
+}
+
+
+label{
+  color: #777;
+  font-weight: 800;
+}
+
+
+.form{
   width: 65%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -44,10 +55,14 @@
   background-color: #ef5350;
 }
 
+.update {
+  background-color: #2196F3;
+}
 .movie-title {
   font-size: 1.5em;
   font-weight: 800;
   color: #777;
+  cursor: pointer;
 }
 
 .movie-rank {
@@ -60,4 +75,12 @@
   display: inline;
   padding: 5px;
   border-radius: 10px;
+}
+
+.not-visible{
+  display: none;
+}
+
+.visible{
+  display: block;
 }

@@ -11,7 +11,8 @@ class MovieData extends Component{
       movies: props.movies,
       title: '',
       rank: '',
-      isEdit: 0
+      isEdit: 0,
+      visible: "not-visible"
     }
   }
 
@@ -43,8 +44,11 @@ class MovieData extends Component{
     this.setState({
       title: movie.title,
       rank: movie.rank,
-      isEdit: movie.id
+      isEdit: movie.id,
+      visible: 'visible'
     });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   updateChange(event){
@@ -70,8 +74,10 @@ class MovieData extends Component{
     this.setState({
       title: '',
       rank: '',
+      visible: 'not-visible',
       movies: newMovies
     })
+    alert('Movie is updated');
   }
 
   render() {
@@ -82,11 +88,11 @@ class MovieData extends Component{
     );
     return(
       <div>
-        <h1>IMDB 100 Top Movies</h1>
+        <div className="form-holder">
           <label>Search Here</label>
           <br/>
           <input
-            className="search-form"
+            className="form"
             type="text"
             placeholder="Search"
             value={this.state.search}
@@ -96,21 +102,25 @@ class MovieData extends Component{
           <AddMovie addMovie={this.addMovie.bind(this)} />
 
           <UpdateMovie
+            visible={this.state.visible}
             updateChange={this.updateChange.bind(this)}
             updateMovie={this.updateMovie.bind(this)}
             title={this.state.title}
             rank={this.state.rank}
           />
+        </div>
 
         <div className="movie-collection">
           {filteredMovies.map(movie =>
             <div key={movie.id}>
+                <small>Click the title to edit it</small>
                 <h4
                   className="movie-title"
                   onClick={this.editMovie.bind(this, movie)}
                 >
                   Movie Name: { movie.title }
                 </h4>
+
                 <p
                   className="movie-rank">
                   Movie Rank:&nbsp;{ movie.rank }

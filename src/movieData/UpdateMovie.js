@@ -15,22 +15,27 @@ class UpdateMovie extends Component{
   render(){
     return(
       <form
+        className={this.props.visible}
         onSubmit={this.updateMovieData.bind(this)}
         onChange={this.updateChangeData.bind(this)}
       >
+        <label>Update Here:</label>
+        <br/>
         <input
+          className="form"
           value={this.props.title}
           type="text"
           ref="titleUpdate"
           name="title"
         />
         <input
+          className="form"
           value={this.props.rank}
           type="text"
           ref="rankUpdate"
           name="rank"
         />
-        <button type="submit">Update</button>
+        <button className="button update" type="submit">Update</button>
       </form>
     );
   }

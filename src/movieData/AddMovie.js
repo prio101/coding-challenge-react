@@ -8,7 +8,7 @@ class AddMovie extends Component{
       this.refs.title.value = ''
       alert('Your movie is added to the list');
     }else{
-      alert('You Must write something on the Form');
+      alert('write something on the input field');
     }
   }
   render(){
