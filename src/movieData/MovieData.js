@@ -83,21 +83,24 @@ class MovieData extends Component{
     return(
       <div>
         <h1>IMDB 100 Top Movies</h1>
-        <input
-          type="text"
-          placeholder="Search"
-          value={this.state.search}
-          onChange={this.updateSearch.bind(this)}
-        />
+          <label>Search Here</label>
+          <br/>
+          <input
+            className="search-form"
+            type="text"
+            placeholder="Search"
+            value={this.state.search}
+            onChange={this.updateSearch.bind(this)}
+          />
 
-        <AddMovie addMovie={this.addMovie.bind(this)} />
+          <AddMovie addMovie={this.addMovie.bind(this)} />
 
-        <UpdateMovie
-          updateChange={this.updateChange.bind(this)}
-          updateMovie={this.updateMovie.bind(this)}
-          title={this.state.title}
-          rank={this.state.rank}
-        />
+          <UpdateMovie
+            updateChange={this.updateChange.bind(this)}
+            updateMovie={this.updateMovie.bind(this)}
+            title={this.state.title}
+            rank={this.state.rank}
+          />
 
         <div className="movie-collection">
           {filteredMovies.map(movie =>
@@ -113,6 +116,7 @@ class MovieData extends Component{
                   Movie Rank:&nbsp;{ movie.rank }
                 </p>
                 <button
+                  className="button delete"
                   onClick={this.deleteMovie.bind(this, movie.id)}
                 >
                   Delete Movie
