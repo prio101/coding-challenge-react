@@ -11,6 +11,7 @@ class AddMovie extends Component{
       alert('write something on the input field');
     }
   }
+
   render(){
     return(
       <form onSubmit={this.addNewMovie.bind(this)}>
