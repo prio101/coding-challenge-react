@@ -1,3 +1,8 @@
+.movie-collection {
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
 .form-holder{
   margin-left: 20%;
 }
@@ -59,10 +64,13 @@ label{
   background-color: #2196F3;
 }
 .movie-title {
-  font-size: 1.5em;
   font-weight: 800;
   color: #777;
   cursor: pointer;
+}
+
+.super{
+  color: #4CAF50;
 }
 
 .movie-rank {

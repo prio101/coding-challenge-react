@@ -113,12 +113,11 @@ class MovieData extends Component{
         <div className="movie-collection">
           {filteredMovies.map(movie =>
             <div key={movie.id}>
-                <small>Click the title to edit it</small>
                 <h4
                   className="movie-title"
                   onClick={this.editMovie.bind(this, movie)}
                 >
-                  Movie Name: { movie.title }
+                  Movie Title: { movie.title }&nbsp;<sup className="super">Click the title to edit it</sup>
                 </h4>
 
                 <p

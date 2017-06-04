@@ -19,7 +19,8 @@ class UpdateMovie extends Component{
         onSubmit={this.updateMovieData.bind(this)}
         onChange={this.updateChangeData.bind(this)}
       >
-        <label>Update Here:</label>
+        <p>Update Here:</p>
+        <label>Movie Title</label>
         <br/>
         <input
           className="form"
@@ -28,6 +29,9 @@ class UpdateMovie extends Component{
           ref="titleUpdate"
           name="title"
         />
+        <br/>
+        <label>Movie Rank</label>
+        <br/>
         <input
           className="form"
           value={this.props.rank}

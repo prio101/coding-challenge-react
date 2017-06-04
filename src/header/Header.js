@@ -13,7 +13,7 @@ class Header extends Component {
           <ul className="header-ul-links">
             <li className="header-single-link">
               <a
-              href={`https://github.com/prio101/coding-challenge-react`}
+                href={`https://github.com/prio101/coding-challenge-react`}
               >
                 GITHUB
               </a>

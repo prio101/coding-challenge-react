@@ -18,6 +18,7 @@ class AddMovie extends Component{
         <label>Add New Movie:</label>
         <br/>
         <input
+          placeholder="Movie Title"
           className="add-movie-form"
           type="text"
           ref="title"
